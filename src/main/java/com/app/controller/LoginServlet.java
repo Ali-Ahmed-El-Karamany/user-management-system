@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
             else {
                 HttpSession session = req.getSession(true);
                 session.setAttribute("loggedUser", user);
-                resp.sendRedirect(req.getContextPath()+"/dashboard");
+                resp.sendRedirect(req.getContextPath()+"/jsp/dashboard.jsp");
             }
         } catch (SQLException e) {
             log("Database error during login", e);
