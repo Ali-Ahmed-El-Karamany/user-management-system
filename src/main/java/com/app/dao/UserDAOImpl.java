@@ -12,9 +12,6 @@ import java.sql.SQLException;
 public class UserDAOImpl implements UserDAO{
     @Override
     public User getUserByEmail(String email) throws SQLException {
-        if(email == null){
-            throw new IllegalArgumentException("email cannot be null");
-        }
         User user = null;
         String sql = "SELECT * FROM users WHERE email=?";
 
@@ -36,5 +33,36 @@ public class UserDAOImpl implements UserDAO{
             }
         }
         return user;
+    }
+
+    @Override
+    public boolean isEmailExists(String email) throws SQLException {
+        String sql ="SELECT 1 FROM users WHERE email=?";
+
+        try(Connection conn = DBConnection.getConnection();
+            PreparedStatement pSt = conn.prepareStatement(sql)){
+
+            pSt.setString(1,email);
+            ResultSet rs = pSt.executeQuery();
+            return rs.next();
+        }
+    }
+
+    @Override
+    public void registerUser(User user) throws SQLException {
+        String sql =
+                "INSERT INTO users(name, email, password, role) " +
+                        "VALUES (?, ?, ?, ?);";
+
+        try(Connection conn = DBConnection.getConnection();
+            PreparedStatement pSt = conn.prepareStatement(sql)){
+
+            pSt.setString(1,user.getName());
+            pSt.setString(2,user.getEmail());
+            pSt.setString(3,user.getPassword());
+            pSt.setString(4,user.getRole().name());
+
+            pSt.executeUpdate();
+        }
     }
 }
