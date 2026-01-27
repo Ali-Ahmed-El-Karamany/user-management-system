@@ -4,6 +4,7 @@ import com.app.dao.UserDAO;
 import com.app.dao.UserDAOImpl;
 import com.app.model.Role;
 import com.app.model.User;
+import com.app.util.PasswordUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -44,10 +45,12 @@ public class RegisterServlet extends HttpServlet {
                 return;
             }
 
+            String hashedPassword = PasswordUtil.hashPassword(password);
+
             User user = new User();
             user.setName(name);
             user.setEmail(email);
-            user.setPassword(password);
+            user.setPassword(hashedPassword);
             user.setRole(Role.USER);
             userDAO.registerUser(user);
 

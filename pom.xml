@@ -50,10 +50,18 @@
       <version>13.2.1.jre11</version>
       <scope>compile</scope>
     </dependency>
+
+    <!-- Source: https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
+    <dependency>
+      <groupId>org.mindrot</groupId>
+      <artifactId>jbcrypt</artifactId>
+      <version>0.4</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
   <build>
     <finalName>user-management-system</finalName>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (maybe moved to parent pom) -->
       <plugins>
         <!--Plugin that responsible for compiling the project  -->
         <plugin>

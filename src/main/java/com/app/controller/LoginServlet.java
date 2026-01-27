@@ -4,6 +4,7 @@ import com.app.dao.UserDAO;
 import com.app.dao.UserDAOImpl;
 
 import com.app.model.User;
+import com.app.util.PasswordUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -41,15 +42,18 @@ public class LoginServlet extends HttpServlet {
             {
                 req.setAttribute("error", "Invalid email or password");
                 req.getRequestDispatcher("/jsp/login.jsp").forward(req,resp);
+                return;
             }
-            else if (!password.equals(user.getPassword())) {
+            else if (!PasswordUtil.verifyPassword(password, user.getPassword())) {
                 req.setAttribute("error", "Invalid email or password");
                 req.getRequestDispatcher("/jsp/login.jsp").forward(req,resp);
+                return;
             }
             else {
                 HttpSession session = req.getSession(true);
                 session.setAttribute("loggedUser", user);
                 resp.sendRedirect(req.getContextPath()+"/jsp/dashboard.jsp");
+                return;
             }
         } catch (SQLException e) {
             log("Database error during login", e);
