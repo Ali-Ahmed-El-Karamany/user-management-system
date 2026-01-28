@@ -1,10 +1,8 @@
 package com.app.controller;
 
-import com.app.dao.UserDAO;
-import com.app.dao.UserDAOImpl;
-
 import com.app.model.User;
-import com.app.util.PasswordUtil;
+import com.app.service.UserService;
+import com.app.service.UserServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,11 +15,11 @@ import java.sql.SQLException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private UserDAO userDAO;
+    private UserService userService;
 
     @Override
     public void init() throws ServletException {
-        userDAO = new UserDAOImpl();
+        userService = new UserServiceImpl();
     }
 
     @Override
@@ -37,14 +35,9 @@ public class LoginServlet extends HttpServlet {
         }
 
         try {
-            User user = userDAO.getUserByEmail(email);
+            User user = userService.authenticate(email,password);
             if (user == null)
             {
-                req.setAttribute("error", "Invalid email or password");
-                req.getRequestDispatcher("/jsp/login.jsp").forward(req,resp);
-                return;
-            }
-            else if (!PasswordUtil.verifyPassword(password, user.getPassword())) {
                 req.setAttribute("error", "Invalid email or password");
                 req.getRequestDispatcher("/jsp/login.jsp").forward(req,resp);
                 return;
@@ -53,7 +46,6 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = req.getSession(true);
                 session.setAttribute("loggedUser", user);
                 resp.sendRedirect(req.getContextPath()+"/jsp/dashboard.jsp");
-                return;
             }
         } catch (SQLException e) {
             log("Database error during login", e);
