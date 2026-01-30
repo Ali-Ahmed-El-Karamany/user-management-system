@@ -3,8 +3,10 @@ package com.app.service;
 import com.app.model.User;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public interface UserService {
-    public User authenticate(String email, String password) throws SQLException;
-    public boolean register(String name, String email, String password) throws SQLException;
+    User authenticate(String email, String password) throws SQLException;
+    boolean register(String name, String email, String password) throws SQLException;
+    List<User> getAllUsers() throws SQLException;
 }

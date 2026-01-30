@@ -12,5 +12,7 @@ public interface UserDAO {
      boolean isEmailExists(String email) throws SQLException;
      void registerUser(User user) throws SQLException;
 
+     List<User> getAllUsers() throws SQLException;
+
 
 }

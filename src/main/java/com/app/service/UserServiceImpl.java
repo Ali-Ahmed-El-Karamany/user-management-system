@@ -7,6 +7,7 @@ import com.app.model.User;
 import com.app.util.PasswordUtil;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserServiceImpl implements UserService{
     private final UserDAO userDAO;
@@ -42,5 +43,10 @@ public class UserServiceImpl implements UserService{
 
             return true;
         }
+    }
+
+    @Override
+    public List<User> getAllUsers() throws SQLException {
+        return userDAO.getAllUsers();
     }
 }

@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO{
     @Override
@@ -64,5 +66,30 @@ public class UserDAOImpl implements UserDAO{
 
             pSt.executeUpdate();
         }
+    }
+
+    @Override
+    public List<User> getAllUsers() throws SQLException {
+        String sql = "SELECT id, name, email, role, created_at FROM users;";
+        List<User> users = new ArrayList<>();
+        User user;
+
+        try (Connection conn = DBConnection.getConnection();
+            PreparedStatement pSt = conn.prepareStatement(sql);
+             ResultSet rs = pSt.executeQuery();) {
+
+            while(rs.next()){
+                user = new User();
+
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setEmail(rs.getString("email"));
+                user.setRole(Role.valueOf(rs.getString("role")));
+                user.setRegistrationTime(rs.getTimestamp("created_at"));
+
+                users.add(user);
+            }
+        }
+        return users;
     }
 }
