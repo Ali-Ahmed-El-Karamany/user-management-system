@@ -20,21 +20,14 @@ public class AuthFilter implements Filter {
         HttpServletResponse httpResponse= (HttpServletResponse)response;
         HttpSession session = httpRequest.getSession(false);
 
-        if(session != null) {
-            User user = (User) session.getAttribute("loggedUser");
+        User user = (session != null) ? (User)session.getAttribute("loggedUser") : null;
 
-            if(user == null)
-            {
-                httpResponse.sendRedirect(httpRequest.getContextPath()+"/jsp/login.jsp");
-            }
-            else{
-                chain.doFilter(request,response);
-            }
-        }
-        else {
+        if(user == null)
+        {
             httpResponse.sendRedirect(httpRequest.getContextPath()+"/jsp/login.jsp");
+            return;
         }
 
-
+        chain.doFilter(request, response);
     }
 }
