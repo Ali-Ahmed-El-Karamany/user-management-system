@@ -9,4 +9,5 @@ public interface UserService {
     User authenticate(String email, String password) throws SQLException;
     boolean register(String name, String email, String password) throws SQLException;
     List<User> getAllUsers() throws SQLException;
+    void deleteUser(int userId, int adminId) throws SQLException, IllegalStateException;
 }

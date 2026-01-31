@@ -92,4 +92,17 @@ public class UserDAOImpl implements UserDAO{
         }
         return users;
     }
+
+    @Override
+    public boolean deleteUser(int id) throws SQLException {
+        String sql = "DELETE FROM users WHERE id=?";
+        int affected;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pSt = conn.prepareStatement(sql)) {
+
+            pSt.setInt(1, id);
+            affected = pSt.executeUpdate();
+        }
+        return affected > 0;
+    }
 }

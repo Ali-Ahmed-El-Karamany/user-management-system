@@ -49,4 +49,13 @@ public class UserServiceImpl implements UserService{
     public List<User> getAllUsers() throws SQLException {
         return userDAO.getAllUsers();
     }
+
+    @Override
+    public void deleteUser(int userId, int adminId) throws SQLException, IllegalStateException  {
+        if(userId == adminId){
+            throw new IllegalStateException("Self-deletion is not permitted");
+        }
+
+        userDAO.deleteUser(userId);
+    }
 }

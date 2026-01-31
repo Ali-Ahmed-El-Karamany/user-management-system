@@ -13,6 +13,7 @@ public interface UserDAO {
      void registerUser(User user) throws SQLException;
 
      List<User> getAllUsers() throws SQLException;
+     boolean deleteUser(int id) throws SQLException;
 
 
 }

@@ -21,6 +21,7 @@
                 <th>Email</th>
                 <th>Role</th>
                 <th>Registration Date</th>
+                <th>Delete User</th>
             </tr>
             <c:forEach var="user" items="${usersList}">
                 <tr>
@@ -29,8 +30,17 @@
                     <td>${user.email}</td>
                     <td>${user.role}</td>
                     <td>${user.registrationTime}</td>
+                    <td>
+                            <form action="${pageContext.request.contextPath}/admin/deleteUser" method="post">
+                                <input type="hidden" name="userId" value="${user.id}"/>
+                                <button type="submit">Delete</button>
+                            </form>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
+        <c:if test="not empty error">
+            <c:out value="${error}"/>
+        </c:if>
     </body>
 </html>
