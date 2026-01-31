@@ -31,15 +31,17 @@
                     <td>${user.role}</td>
                     <td>${user.registrationTime}</td>
                     <td>
+			            <c:if test="${user.id != loggedUser.id}">
                             <form action="${pageContext.request.contextPath}/admin/deleteUser" method="post">
                                 <input type="hidden" name="userId" value="${user.id}"/>
                                 <button type="submit">Delete</button>
                             </form>
+                        </c:if>
                     </td>
                 </tr>
             </c:forEach>
         </table>
-        <c:if test="not empty error">
+        <c:if test="${not empty error}">
             <c:out value="${error}"/>
         </c:if>
     </body>

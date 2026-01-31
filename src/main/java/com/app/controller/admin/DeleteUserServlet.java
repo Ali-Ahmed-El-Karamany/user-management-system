@@ -36,11 +36,11 @@ public class DeleteUserServlet extends HttpServlet {
         } catch (SQLException e) {
             log("Database error during user deletion", e);
             req.setAttribute("error", "Something went wrong. Please try again later.");
-            req.getRequestDispatcher("/admin/dashboard").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/admin/dashboard?error=Database");
         } catch (IllegalStateException e) {
             log("Self deletion attempt", e);
             req.setAttribute("error", "Self deletion is not permitted.");
-            req.getRequestDispatcher("/admin/dashboard").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/admin/dashboard?error=selfDelete");
         }
     }
 }
