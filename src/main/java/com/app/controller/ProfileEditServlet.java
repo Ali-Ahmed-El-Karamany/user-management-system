@@ -39,7 +39,7 @@ public class ProfileEditServlet extends HttpServlet {
             id = loggedUser.getId();
         else {
             req.setAttribute("error", "UnAuthenticated access, please Login");
-            req.getRequestDispatcher("/jsp/login.jsp").forward(req,resp);
+            req.getRequestDispatcher("/login").forward(req,resp);
             return;
         }
         String newName = req.getParameter("newName");
