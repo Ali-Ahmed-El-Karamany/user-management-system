@@ -6,7 +6,7 @@
 
   <!--To set a default page for the servlet-->
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>login</welcome-file>
   </welcome-file-list>
 
 </web-app>

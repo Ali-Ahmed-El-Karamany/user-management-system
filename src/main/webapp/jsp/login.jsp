@@ -21,5 +21,9 @@
 
             <button type="submit">Login</button>
         </form>
+
+        <form action="${pageContext.request.contextPath}/register" method="get">
+            <button type="submit">Create new account</button>
+        </form>
     </body>
 </html>
