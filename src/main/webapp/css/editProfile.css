@@ -1,0 +1,151 @@
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f3f4f6;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+.navbar {
+    background-color: #111827;
+    color: white;
+    padding: 1rem 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #3b82f6;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #d1d5db;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.logout-link {
+    color: #f87171 !important;
+}
+
+.edit-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 20px;
+    min-height: calc(100vh - 64px);
+}
+
+.edit-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    padding: 40px;
+}
+
+.edit-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.edit-header h2 {
+    font-size: 1.5rem;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.edit-header p {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #374151;
+    margin-bottom: 6px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #111827;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.btn-update {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 13px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-update:hover {
+    background-color: #2563eb;
+}
+
+.btn-cancel {
+    text-align: center;
+    text-decoration: none;
+    color: #6b7280;
+    font-size: 0.9rem;
+    padding: 10px;
+    transition: color 0.2s;
+}
+
+.btn-cancel:hover {
+    color: #111827;
+}
+
+.error-banner {
+    background-color: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    text-align: center;
+}

@@ -3,27 +3,45 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head><title>login</title></head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+    </head>
     <body>
-        <h2>login</h2>
+        <div class="login-container">
+            <div class="login-header">
+                <h1>login</h1>
+            </div>
 
-        <c:if test="${not empty error}">
-            <c:out value="${error}" />
-        </c:if>
+            <c:if test="${not empty error}">
+                <div class="error-message">
+                    <c:out value="${error}" />
+                </div>
+            </c:if>
 
-        <form action="${pageContext.request.contextPath}/login" method="post">
+            <form action="${pageContext.request.contextPath}/login" method="post" class="login-form">
 
-            <label>Email:</label><br>
-            <input type="email" name="email" required><br><br>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" id="email" class="form-input" placeholder="Enter your name">
+                </div>
 
-            <label>Password:</label><br>
-            <input type="password" name="password" required><br><br>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" id="password" class="form-input" placeholder="Enter your password">
+                </div>
 
-            <button type="submit">Login</button>
-        </form>
+                <div class="form-action">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
 
-        <form action="${pageContext.request.contextPath}/register" method="get">
-            <button type="submit">Create new account</button>
-        </form>
+            <footer class="login-footer">
+                <p>Don't have an account?</p>
+                <a href="${pageContext.request.contextPath}/register" class="btn btn-secondary">Create new account</a>
+            </footer>
+        </div>
     </body>
 </html>
