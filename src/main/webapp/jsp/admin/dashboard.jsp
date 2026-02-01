@@ -41,8 +41,12 @@
                 </tr>
             </c:forEach>
         </table>
+
         <c:if test="${not empty error}">
             <c:out value="${error}"/>
+        </c:if>
+        <c:if test="${not empty message}">
+            <c:out value="${message}"/>
         </c:if>
     </body>
 </html>

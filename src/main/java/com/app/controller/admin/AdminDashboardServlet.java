@@ -26,12 +26,16 @@ public class AdminDashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<User> users;
         String error = req.getParameter("error");
+        String message = req.getParameter("message");
 
         if("selfDelete".equals(error))
             req.setAttribute("error", "Self deletion is not permitted");
 
         if("Database".equals(error))
             req.setAttribute("error", "Something went wrong. Please try again later");
+
+        if("success".equals(message))
+            req.setAttribute("message", "User deleted successful");
 
         try {
             users = userService.getAllUsers();
