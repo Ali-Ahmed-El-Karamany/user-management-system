@@ -38,6 +38,30 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
+    public User getUserById(int id) throws SQLException {
+        User user = null;
+        String sql = "SELECT * FROM users WHERE id=?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pSt = conn.prepareStatement(sql)) {
+            pSt.setInt(1, id);
+
+            ResultSet rs= pSt.executeQuery();
+            if(rs.next())
+            {
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setRole(Role.valueOf(rs.getString("role")));
+                user.setRegistrationTime(rs.getTimestamp("created_at"));
+            }
+        }
+        return user;
+    }
+
+    @Override
     public boolean isEmailExists(String email) throws SQLException {
         String sql ="SELECT 1 FROM users WHERE email=?";
 
@@ -104,5 +128,21 @@ public class UserDAOImpl implements UserDAO{
             affected = pSt.executeUpdate();
         }
         return affected > 0;
+    }
+
+    @Override
+    public boolean updateProfile(int userId, String newName, String newEmail) throws SQLException {
+        String sql = "UPDATE users SET name=?, email=? WHERE id =?";
+        int affected;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pSt = conn.prepareStatement(sql)) {
+
+            pSt.setString(1, newName);
+            pSt.setString(2, newEmail);
+            pSt.setInt(3, userId);
+
+            affected = pSt.executeUpdate();
+            return affected > 0 ;
+        }
     }
 }

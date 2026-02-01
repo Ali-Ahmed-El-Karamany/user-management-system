@@ -8,6 +8,7 @@
     </head>
 
     <body>
+        <a href="${pageContext.request.contextPath}/jsp/profile.jsp">My Profile</a>
         <a href="${pageContext.request.contextPath}/logout">Logout</a>
         <hr>
 

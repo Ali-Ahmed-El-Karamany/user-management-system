@@ -27,6 +27,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User getUserById(int id) throws SQLException {
+        return userDAO.getUserById(id);
+    }
+
+    @Override
     public boolean register(String name, String email, String password) throws SQLException {
         if(userDAO.isEmailExists(email)){
             return false;
@@ -57,5 +62,28 @@ public class UserServiceImpl implements UserService{
         }
 
         userDAO.deleteUser(userId);
+    }
+
+    @Override
+    public boolean updateProfile(int userId, String newName, String newEmail) throws SQLException, IllegalStateException, SecurityException {
+        User user = null;
+        String oldEmail;
+
+        user = userDAO.getUserById(userId);
+
+        if (user == null)
+            throw new SecurityException("User not found");
+
+        oldEmail = user.getEmail();
+
+        if(!newEmail.equals(oldEmail))
+        {
+            if(userDAO.isEmailExists(newEmail))
+            {
+                throw new IllegalStateException("Email Already exists, please try another email");
+            }
+        }
+
+        return userDAO.updateProfile(userId, newName, newEmail);
     }
 }
