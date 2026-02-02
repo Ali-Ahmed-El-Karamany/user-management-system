@@ -13,7 +13,7 @@
     <nav class="navbar">
         <div class="nav-logo">User Management System</div>
         <ul class="nav-links">
-            <li><a href="${pageContext.request.contextPath}/profile/edit">My Profile</a></li>
+            <li><a href="${pageContext.request.contextPath}/profile">My Profile</a></li>
             <li><a href="${pageContext.request.contextPath}/logout" class="logout-link">Logout</a></li>
         </ul>
     </nav>
