@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.app.controller.admin.DeleteUserServlet;
 import com.app.dao.UserDAO;
 import com.app.dao.UserDAOImpl;
 import com.app.model.Role;
@@ -85,5 +86,31 @@ public class UserServiceImpl implements UserService{
         }
 
         return userDAO.updateProfile(userId, newName, newEmail);
+    }
+
+    @Override
+    public boolean confirmPassword(String newPassword, String confirmPassword) {
+        return newPassword.equals(confirmPassword);
+
+    }
+
+    @Override
+    public boolean changePassword(User loggedUser, String oldPassword, String newPassword) throws SQLException, IllegalArgumentException,
+            IllegalStateException, SecurityException {
+        if(newPassword.equals(oldPassword))
+            throw new IllegalArgumentException("New password must be different from the current password");
+
+        User user = getUserById(loggedUser.getId());
+
+        if (user == null)
+            throw new SecurityException("User not found");
+
+        if(PasswordUtil.verifyPassword(oldPassword, user.getPassword()))
+        {
+            String hashedNewPassword= PasswordUtil.hashPassword(newPassword);
+            return userDAO.updatePassword(loggedUser.getId(),hashedNewPassword);
+        }
+        else
+            throw new IllegalStateException("Current password is incorrect");
     }
 }

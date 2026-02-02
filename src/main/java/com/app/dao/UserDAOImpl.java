@@ -145,4 +145,19 @@ public class UserDAOImpl implements UserDAO{
             return affected > 0 ;
         }
     }
+
+    @Override
+    public boolean updatePassword(int userId, String hashedPassword) throws SQLException{
+        String sql = "UPDATE users SET password=? WHERE id=?";
+        int affected;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pSt = conn.prepareStatement(sql)) {
+
+            pSt.setString(1, hashedPassword);
+            pSt.setInt(2, userId);
+
+            affected = pSt.executeUpdate();
+            return affected > 0 ;
+        }
+    }
 }

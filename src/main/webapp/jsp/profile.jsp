@@ -53,7 +53,8 @@
             </section>
 
             <footer class="profile-actions">
-                <a href="${pageContext.request.contextPath}/profile/edit" class="btn btn-edit">Edit Profile</a>
+                <a href="${pageContext.request.contextPath}/profile/edit" class="btn-edit">Edit Profile</a>
+                <a href="${pageContext.request.contextPath}/profile/changePassword" class="btn-password">Change Password</a>
             </footer>
         </div>
     </main>

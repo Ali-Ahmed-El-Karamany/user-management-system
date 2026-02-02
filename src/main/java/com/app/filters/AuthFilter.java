@@ -11,7 +11,7 @@ import java.io.IOException;
 
 
 @WebFilter(urlPatterns= {"/jsp/dashboard.jsp", "/jsp/profile.jsp",
-                        "/profile", "/profile/*"})
+                        "/profile", "/profile/*", "/jsp/changePassword.jsp"})
 public class AuthFilter implements Filter {
 
     @Override

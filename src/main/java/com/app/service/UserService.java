@@ -12,5 +12,8 @@ public interface UserService {
     List<User> getAllUsers() throws SQLException;
     boolean deleteUser(int userId, int adminId) throws SQLException, IllegalStateException;
     boolean updateProfile(int userId, String newName, String newEmail) throws SQLException, IllegalStateException, SecurityException;
+    boolean confirmPassword(String newPassword, String confirmPassword);
+    boolean changePassword(User loggedUser, String oldPassword, String newPassword) throws SQLException, IllegalArgumentException,
+            IllegalStateException, SecurityException;
 
 }
