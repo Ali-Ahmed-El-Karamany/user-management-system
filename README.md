@@ -47,7 +47,9 @@ src/main/
 ├── webapp/
 │   ├── css/             # Independent stylesheets
 │   └── jsp/             # Application views
+```
 ---
+
 ## Key Functionalities
 
 ### Authentication
